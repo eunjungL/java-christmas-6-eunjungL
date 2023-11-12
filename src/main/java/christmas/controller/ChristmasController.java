@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Menu;
+import christmas.domain.Order;
 import christmas.service.UserService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -22,7 +23,12 @@ public class ChristmasController {
         outputView.printStartComment();
 
         Integer visitDate = getVisitDate();
-        HashMap<Menu, Integer> order = getOrder();
+        HashMap<Menu, Integer> menus = getOrder();
+
+        Order order = new Order(visitDate, menus);
+        outputView.printOrderResult(order.toString());
+
+        outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
     }
 
     private Integer getVisitDate() {
