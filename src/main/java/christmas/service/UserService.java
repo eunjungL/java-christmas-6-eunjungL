@@ -19,7 +19,7 @@ public class UserService {
         try {
             int date = Integer.parseInt(visitDate);
 
-            if (date < 1 || date > 31) {
+            if (date < Constants.MIN_VISIT_DATE || date > Constants.MAX_VISIT_DATE) {
                 throw new IllegalArgumentException(Constants.VISIT_DATE_ERROR);
             }
         } catch (NumberFormatException exception) {
@@ -60,7 +60,7 @@ public class UserService {
             totalCount += result.get(menu);
         }
 
-        if (totalCount > 20) {
+        if (totalCount > Constants.MAX_ORDER_COUNT) {
             throw new IllegalArgumentException(Constants.ORDER_ERROR);
         }
     }
@@ -93,7 +93,7 @@ public class UserService {
         try {
             int c = Integer.parseInt(count);
 
-            if (c < 1) {
+            if (c < Constants.MIN_ORDER_COUNT) {
                 throw new IllegalArgumentException(Constants.ORDER_ERROR);
             }
         } catch (NumberFormatException exception) {
