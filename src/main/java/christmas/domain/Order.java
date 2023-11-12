@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.Constants;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +23,10 @@ public class Order {
         }
 
         return totalPrice;
+    }
+
+    public Boolean checkPresentation() {
+        return getTotalPriceBeforeDiscount() >= Constants.PRESENTATION_PRICE;
     }
 
     @Override

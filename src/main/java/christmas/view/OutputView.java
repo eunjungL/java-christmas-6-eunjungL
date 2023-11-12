@@ -28,4 +28,9 @@ public class OutputView {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(decimalFormat.format(totalPrice) + "원" + "\n");
     }
+
+    public void printPresentation(String result) {
+        System.out.println("<증정 메뉴>");
+        System.out.println(result + "\n");
+    }
 }

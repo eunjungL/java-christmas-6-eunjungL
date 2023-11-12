@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Menu;
 import christmas.domain.Order;
+import christmas.service.ChristmasService;
 import christmas.service.UserService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -12,17 +13,21 @@ public class ChristmasController {
     private final InputView inputView;
     private final OutputView outputView;
     private final UserService userService;
+    private final ChristmasService christmasService;
 
-    public ChristmasController(InputView inputView, OutputView outputView, UserService userService) {
+    public ChristmasController(InputView inputView, OutputView outputView, UserService userService, ChristmasService christmasService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.userService = userService;
+        this.christmasService = christmasService;
     }
 
     public void run() {
         outputView.printStartComment();
 
         Order order = getOrder();
+
+        getPresentation(order);
     }
 
     private Order getOrder() {
@@ -56,5 +61,10 @@ public class ChristmasController {
                 outputView.printErrorMessage(exception);
             }
         }
+    }
+
+    private void getPresentation(Order order) {
+        String result = christmasService.getPresentation(order);
+        outputView.printPresentation(result);
     }
 }
