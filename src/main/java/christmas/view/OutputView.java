@@ -13,6 +13,10 @@ public class OutputView {
         System.out.println(Constants.START_COMMENT);
     }
 
+    public void printEventComment() {
+        System.out.println(Constants.EVENT_COMMENT);
+    }
+
     public void printOrderResult(String order) {
         System.out.println("<주문 메뉴>");
         System.out.println(order + "\n");

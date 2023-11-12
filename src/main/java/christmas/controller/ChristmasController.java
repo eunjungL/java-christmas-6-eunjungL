@@ -23,8 +23,6 @@ public class ChristmasController {
         outputView.printStartComment();
 
         Order order = getOrder();
-
-        outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
     }
 
     private Order getOrder() {
@@ -32,7 +30,10 @@ public class ChristmasController {
         HashMap<Menu, Integer> menus = getMenus();
 
         Order order = new Order(visitDate, menus);
+
+        outputView.printEventComment();
         outputView.printOrderResult(order.toString());
+        outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
 
         return order;
     }
