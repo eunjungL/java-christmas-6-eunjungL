@@ -9,7 +9,7 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String getOrder() {
+    public String getMenus() {
         System.out.println(Constants.GET_ORDER_MENU_COMMENT);
         return Console.readLine();
     }

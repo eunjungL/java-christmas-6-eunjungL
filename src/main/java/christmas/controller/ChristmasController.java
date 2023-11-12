@@ -22,13 +22,19 @@ public class ChristmasController {
     public void run() {
         outputView.printStartComment();
 
+        Order order = getOrder();
+
+        outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
+    }
+
+    private Order getOrder() {
         Integer visitDate = getVisitDate();
-        HashMap<Menu, Integer> menus = getOrder();
+        HashMap<Menu, Integer> menus = getMenus();
 
         Order order = new Order(visitDate, menus);
         outputView.printOrderResult(order.toString());
 
-        outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
+        return order;
     }
 
     private Integer getVisitDate() {
@@ -41,10 +47,10 @@ public class ChristmasController {
         }
     }
 
-    private HashMap<Menu, Integer> getOrder() {
+    private HashMap<Menu, Integer> getMenus() {
         while (true) {
             try {
-                return userService.getOrder(inputView.getOrder());
+                return userService.getMenus(inputView.getMenus());
             } catch (IllegalArgumentException exception) {
                 outputView.printErrorMessage(exception);
             }

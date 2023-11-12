@@ -27,8 +27,8 @@ public class UserService {
         }
     }
 
-    public HashMap<Menu, Integer> getOrder(String orderInput) {
-        String[] orders = orderInput.split(",");
+    public HashMap<Menu, Integer> getMenus(String menusInput) {
+        String[] orders = menusInput.split(",");
 
         HashMap<Menu, Integer> result = new HashMap<>();
         for (String order : orders) {
