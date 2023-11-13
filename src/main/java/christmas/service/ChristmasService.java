@@ -38,4 +38,16 @@ public class ChristmasService {
 
         return result;
     }
+
+    public Integer getTotalDiscountPrice(Order order) {
+        int totalDiscountPrice = 0;
+
+        for (Event event : Event.values()) {
+            if (order.checkAppliedEvents(event) && order.getDiscountPrice(event) > 0) {
+                totalDiscountPrice += order.getDiscountPrice(event);
+            }
+        }
+
+        return totalDiscountPrice;
+    }
 }

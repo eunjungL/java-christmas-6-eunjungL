@@ -35,4 +35,9 @@ public class OutputView {
         System.out.println("<혜택 내역>");
         System.out.println(result + "\n");
     }
+
+    public void printTotalDiscountPrice(Integer result) {
+        System.out.println("<총혜택 금액>");
+        System.out.printf("-%s원\n%n", DecimalUtil.convertToFormat(result));
+    }
 }
