@@ -38,7 +38,13 @@ public class OutputView {
 
     public void printTotalDiscountPrice(Integer result) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("-%s원\n%n", DecimalUtil.convertToFormat(result));
+
+        String format = "-%s원\n%n";
+        if (result == 0) {
+            format = "%s원\n%n";
+        }
+
+        System.out.printf(format, DecimalUtil.convertToFormat(result));
     }
 
     public void printTotalPriceAfterDiscount(Integer result) {
