@@ -11,7 +11,7 @@ public enum Menu {
     TAPAS("타파스", 5500, MenuType.APPETIZER),
     SALAD("시저샐러드", 8000, MenuType.APPETIZER),
     STAKE("티본스테이크", 55000, MenuType.MAIN),
-    BARBECUE("바베큐립", 54000, MenuType.MAIN),
+    BARBECUE("바비큐립", 54000, MenuType.MAIN),
     SEAFOOD_PASTA("해산물파스타", 35000, MenuType.MAIN),
     CHRISTMAS_PASTA("크리스마스파스타", 25000, MenuType.MAIN),
     CAKE("초코케이크", 15000, MenuType.DESSERT),
