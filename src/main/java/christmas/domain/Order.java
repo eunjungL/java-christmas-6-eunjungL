@@ -67,7 +67,7 @@ public class Order {
     public Integer getTotalPriceAfterDiscount() {
         int totalPrice = getTotalPriceBeforeDiscount() - totalDiscountPrice;
 
-        if (!order.containsKey(Menu.CHAMPAGNE)) {
+        if (appliedEvents.contains(Event.PRESENTATION) && !order.containsKey(Menu.CHAMPAGNE)) {
             totalPrice += Event.PRESENTATION.getDiscountPrice();
         }
 
