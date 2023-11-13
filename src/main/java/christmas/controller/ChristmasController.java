@@ -38,7 +38,7 @@ public class ChristmasController {
 
         Order order = new Order(visitDate, menus);
 
-        outputView.printEventComment();
+        outputView.printEventComment(visitDate);
         outputView.printOrderResult(order.toString());
         outputView.printTotalPriceBeforeDiscount(order.getTotalPriceBeforeDiscount());
 

@@ -12,8 +12,8 @@ public class OutputView {
         System.out.println(Constants.START_COMMENT);
     }
 
-    public void printEventComment() {
-        System.out.println(Constants.EVENT_COMMENT);
+    public void printEventComment(Integer visitDate) {
+        System.out.printf(Constants.EVENT_COMMENT + "\n", visitDate);
     }
 
     public void printOrderResult(String order) {
