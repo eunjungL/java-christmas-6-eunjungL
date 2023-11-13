@@ -4,8 +4,6 @@ import christmas.DecimalUtil;
 import christmas.domain.Event;
 import christmas.domain.Order;
 
-import java.text.DecimalFormat;
-
 public class ChristmasService {
     public String getPresentation(Order order) {
         if (order.checkPresentation()) return "샴페인 1개";

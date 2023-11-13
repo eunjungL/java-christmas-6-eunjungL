@@ -1,8 +1,7 @@
 package christmas.view;
 
 import christmas.Constants;
-
-import java.text.DecimalFormat;
+import christmas.DecimalUtil;
 
 public class OutputView {
     public void printErrorMessage(Exception exception) {
@@ -23,10 +22,8 @@ public class OutputView {
     }
 
     public void printTotalPriceBeforeDiscount(Integer totalPrice) {
-        DecimalFormat decimalFormat = new DecimalFormat("###,###");
-
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(decimalFormat.format(totalPrice) + "원" + "\n");
+        System.out.println(DecimalUtil.convertToFormat(totalPrice) + "원" + "\n");
     }
 
     public void printPresentation(String result) {
