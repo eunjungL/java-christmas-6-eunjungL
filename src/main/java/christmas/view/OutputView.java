@@ -40,4 +40,9 @@ public class OutputView {
         System.out.println("<총혜택 금액>");
         System.out.printf("-%s원\n%n", DecimalUtil.convertToFormat(result));
     }
+
+    public void printBadge(String result) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(result);
+    }
 }

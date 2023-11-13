@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.DecimalUtil;
+import christmas.domain.Badge;
 import christmas.domain.Event;
 import christmas.domain.Order;
 
@@ -43,5 +44,11 @@ public class ChristmasService {
 
     public Integer getTotalDiscountPrice(Order order) {
         return order.getTotalDiscountPrice();
+    }
+
+    public String getBadge(Order order) {
+        Badge badge = Badge.getBadgeByDiscount(order.getTotalDiscountPrice());
+
+        return badge.toString();
     }
 }
