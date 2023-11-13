@@ -55,6 +55,16 @@ public class Order {
         return discountPrice;
     }
 
+    public Integer getPresentationDiscount() {
+        int discountPrice = 0;
+
+        if (checkPresentation()) {
+            discountPrice += Event.PRESENTATION.getDiscountPrice();
+        }
+
+        return discountPrice;
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();

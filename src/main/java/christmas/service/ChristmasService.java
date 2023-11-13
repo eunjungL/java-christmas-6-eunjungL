@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.DecimalUtil;
 import christmas.domain.Event;
 import christmas.domain.Order;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ChristmasService {
         result.add(getDDayDiscount(order));
         result.add(getWeekDayDiscount(order));
         result.add(getWeekEndDiscount(order));
+        result.add(getPresentationDiscount(order));
 
         return String.join("\n", result);
     }
@@ -43,5 +45,12 @@ public class ChristmasService {
 
         if (discountPrice == 0) return "";
         return String.format("%s%s원", Event.WEEKEND, DecimalUtil.convertToFormat(discountPrice));
+    }
+
+    private String getPresentationDiscount(Order order) {
+        int discountPrice = order.getPresentationDiscount();
+
+        if (discountPrice == 0) return  "";
+        return String.format("%s%s원", Event.PRESENTATION, DecimalUtil.convertToFormat(discountPrice));
     }
 }
