@@ -22,6 +22,7 @@ public class ChristmasService {
         result.add(getWeekDayDiscount(order));
         result.add(getWeekEndDiscount(order));
         result.add(getPresentationDiscount(order));
+        result.add(getSpecialDiscount(order));
 
         return String.join("\n", result);
     }
@@ -52,5 +53,12 @@ public class ChristmasService {
 
         if (discountPrice == 0) return  "";
         return String.format("%s%s원", Event.PRESENTATION, DecimalUtil.convertToFormat(discountPrice));
+    }
+
+    private String getSpecialDiscount(Order order) {
+        int discountPrice = order.getSpecialDiscount();
+
+        if (discountPrice == 0) return  "";
+        return String.format("%s%s원", Event.SPECIAL, DecimalUtil.convertToFormat(discountPrice));
     }
 }

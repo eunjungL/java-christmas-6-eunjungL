@@ -65,6 +65,12 @@ public class Order {
         return discountPrice;
     }
 
+    public Integer getSpecialDiscount() {
+        if (Event.checkSpecial(visitDate)) return Event.SPECIAL.getDiscountPrice();
+
+        return 0;
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();
