@@ -28,8 +28,11 @@ public class ChristmasController {
         Order order = getOrder();
 
         getPresentation(order);
+
         getAppliedEvents(order);
+
         getTotalDiscountPrice(order);
+        getTotalPriceAfterDiscount(order);
 
         getBadge(order);
     }
@@ -80,6 +83,11 @@ public class ChristmasController {
     private void getTotalDiscountPrice(Order order) {
         Integer result = christmasService.getTotalDiscountPrice(order);
         outputView.printTotalDiscountPrice(result);
+    }
+
+    private void getTotalPriceAfterDiscount(Order order) {
+        Integer result = christmasService.getTotalPriceAfterDiscount(order);
+        outputView.printTotalPriceAfterDiscount(result);
     }
 
     private void getBadge(Order order) {

@@ -41,6 +41,11 @@ public class OutputView {
         System.out.printf("-%s원\n%n", DecimalUtil.convertToFormat(result));
     }
 
+    public void printTotalPriceAfterDiscount(Integer result) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(DecimalUtil.convertToFormat(result) + "원\n");
+    }
+
     public void printBadge(String result) {
         System.out.println("<12월 이벤트 배지>");
         System.out.println(result);

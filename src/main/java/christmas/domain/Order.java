@@ -64,6 +64,16 @@ public class Order {
         return totalDiscountPrice;
     }
 
+    public Integer getTotalPriceAfterDiscount() {
+        int totalPrice = getTotalPriceBeforeDiscount() - totalDiscountPrice;
+
+        if (!order.containsKey(Menu.CHAMPAGNE)) {
+            totalPrice += Event.PRESENTATION.getDiscountPrice();
+        }
+
+        return totalPrice;
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();

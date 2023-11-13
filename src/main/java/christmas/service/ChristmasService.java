@@ -51,4 +51,8 @@ public class ChristmasService {
 
         return badge.toString();
     }
+
+    public Integer getTotalPriceAfterDiscount(Order order) {
+        return order.getTotalPriceAfterDiscount();
+    }
 }
