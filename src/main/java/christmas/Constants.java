@@ -16,7 +16,7 @@ public class Constants {
     public static final int D_DAY_LAST_DAY = 25;
 
     /** 에러 메시지 */
-    private static final String ERROR_PREFIX = "[ERROR]";
+    private static final String ERROR_PREFIX = "[ERROR] ";
     public static final String VISIT_DATE_ERROR = ERROR_PREFIX + "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String ORDER_ERROR = ERROR_PREFIX + "유효하지 않은 주문입니다. 다시 입력해 주세요.";
 }
