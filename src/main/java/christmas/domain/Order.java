@@ -9,10 +9,13 @@ import java.util.List;
 public class Order {
     private final Integer visitDate;
     private final HashMap<Menu, Integer> order;
+    private final List<Event> appliedEvents;
 
     public Order(Integer visitDate, HashMap<Menu, Integer> order) {
         this.visitDate = visitDate;
         this.order = order;
+
+        this.appliedEvents = getAppliedEvents();
     }
 
     public Integer getTotalPriceBeforeDiscount() {
@@ -25,50 +28,31 @@ public class Order {
         return totalPrice;
     }
 
-    public Boolean checkPresentation() {
-        return getTotalPriceBeforeDiscount() >= Constants.PRESENTATION_PRICE;
-    }
+    private List<Event> getAppliedEvents() {
+        List<Event> appliedEvents = new ArrayList<>();
 
-    public Integer getDDayDiscount() {
-        if (visitDate > Constants.D_DAY_LAST_DAY) return 0;
-
-        return 1000 + (visitDate - 1) * Event.D_DAY.getDiscountPrice();
-    }
-
-    public Integer getWeekDayDiscount() {
-        int discountPrice = 0;
-
-        if (Event.checkWeekDay(visitDate)) {
-            discountPrice += Event.WEEKDAY.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.DESSERT);
+        for (Event event : Event.values()) {
+            if (event.checkApplied(getTotalPriceBeforeDiscount(), visitDate)) {
+                appliedEvents.add(event);
+            }
         }
 
-        return discountPrice;
+        return appliedEvents;
     }
 
-    public Integer getWeekEndDiscount() {
-        int discountPrice = 0;
-
-        if (Event.checkWeekEnd(visitDate)) {
-            discountPrice += Event.WEEKEND.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.MAIN);
-        }
-
-        return discountPrice;
+    public Boolean checkAppliedEvents(Event event) {
+        return appliedEvents.contains(event);
     }
 
-    public Integer getPresentationDiscount() {
-        int discountPrice = 0;
+    public Integer getDiscountPrice(Event event) {
+        if (event == Event.D_DAY)
+            return 1000 + (visitDate - 1) * event.getDiscountPrice();
+        if (event == Event.WEEKDAY)
+            return event.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.DESSERT);
+        if (event == Event.WEEKEND)
+            return event.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.MAIN);
 
-        if (checkPresentation()) {
-            discountPrice += Event.PRESENTATION.getDiscountPrice();
-        }
-
-        return discountPrice;
-    }
-
-    public Integer getSpecialDiscount() {
-        if (Event.checkSpecial(visitDate)) return Event.SPECIAL.getDiscountPrice();
-
-        return 0;
+        return event.getDiscountPrice();
     }
 
     @Override

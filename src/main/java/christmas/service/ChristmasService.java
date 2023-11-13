@@ -10,55 +10,32 @@ import java.util.List;
 
 public class ChristmasService {
     public String getPresentation(Order order) {
-        if (order.checkPresentation()) return "샴페인 1개";
+        if (order.checkAppliedEvents(Event.PRESENTATION)) return "샴페인 1개";
 
         return "없음";
     }
 
     public String getAppliedEvents(Order order) {
-        List<String> result = new ArrayList<>();
+        List<String> result = getDiscountInfo(order);
 
-        result.add(getDDayDiscount(order));
-        result.add(getWeekDayDiscount(order));
-        result.add(getWeekEndDiscount(order));
-        result.add(getPresentationDiscount(order));
-        result.add(getSpecialDiscount(order));
-
+        if (result.size() == 0) return "없음";
         return String.join("\n", result);
     }
 
-    private String getDDayDiscount(Order order) {
-        int discountPrice = order.getDDayDiscount();
+    private List<String> getDiscountInfo(Order order) {
+        List<String> result = new ArrayList<>();
 
-        if (discountPrice == 0) return "";
-        return String.format("%s%s원", Event.D_DAY, DecimalUtil.convertToFormat(discountPrice));
-    }
+        for (Event event : Event.values()) {
+            if (order.checkAppliedEvents(event) && order.getDiscountPrice(event) > 0) {
+                String discountInfo = String.format("%s%s원",
+                        event,
+                        DecimalUtil.convertToFormat(order.getDiscountPrice(event))
+                );
 
-    private String getWeekDayDiscount(Order order) {
-        int discountPrice = order.getWeekDayDiscount();
+                result.add(discountInfo);
+            }
+        }
 
-        if (discountPrice == 0) return "";
-        return String.format("%s%s원", Event.WEEKDAY, DecimalUtil.convertToFormat(discountPrice));
-    }
-
-    private String getWeekEndDiscount(Order order) {
-        int discountPrice = order.getWeekEndDiscount();
-
-        if (discountPrice == 0) return "";
-        return String.format("%s%s원", Event.WEEKEND, DecimalUtil.convertToFormat(discountPrice));
-    }
-
-    private String getPresentationDiscount(Order order) {
-        int discountPrice = order.getPresentationDiscount();
-
-        if (discountPrice == 0) return  "";
-        return String.format("%s%s원", Event.PRESENTATION, DecimalUtil.convertToFormat(discountPrice));
-    }
-
-    private String getSpecialDiscount(Order order) {
-        int discountPrice = order.getSpecialDiscount();
-
-        if (discountPrice == 0) return  "";
-        return String.format("%s%s원", Event.SPECIAL, DecimalUtil.convertToFormat(discountPrice));
+        return result;
     }
 }
