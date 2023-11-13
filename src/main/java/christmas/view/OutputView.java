@@ -33,4 +33,9 @@ public class OutputView {
         System.out.println("<증정 메뉴>");
         System.out.println(result + "\n");
     }
+
+    public void printAppliedEvents(String result) {
+        System.out.println("<혜택 내역>");
+        System.out.println(result + "\n");
+    }
 }

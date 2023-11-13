@@ -28,6 +28,7 @@ public class ChristmasController {
         Order order = getOrder();
 
         getPresentation(order);
+        getAppliedEvents(order);
     }
 
     private Order getOrder() {
@@ -66,5 +67,10 @@ public class ChristmasController {
     private void getPresentation(Order order) {
         String result = christmasService.getPresentation(order);
         outputView.printPresentation(result);
+    }
+
+    private void getAppliedEvents(Order order) {
+        String result = christmasService.getAppliedEvents(order);
+        outputView.printAppliedEvents(result);
     }
 }

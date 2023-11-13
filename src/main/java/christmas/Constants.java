@@ -13,6 +13,7 @@ public class Constants {
     public static final int MIN_ORDER_COUNT = 1;
     public static final int MAX_ORDER_COUNT = 20;
     public static final int PRESENTATION_PRICE = 120000;
+    public static final int D_DAY_LAST_DAY = 25;
 
     /** 에러 메시지 */
     private static final String ERROR_PREFIX = "[ERROR]";

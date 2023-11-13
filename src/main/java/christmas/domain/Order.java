@@ -29,6 +29,12 @@ public class Order {
         return getTotalPriceBeforeDiscount() >= Constants.PRESENTATION_PRICE;
     }
 
+    public Integer getDDayDiscount() {
+        if (visitDate > Constants.D_DAY_LAST_DAY) return 0;
+
+        return 1000 + (visitDate - 1) * Event.D_DAY.getDiscountPrice();
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();
