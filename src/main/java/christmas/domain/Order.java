@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Order {
-    private Integer visitDate;
-    private HashMap<Menu, Integer> order;
+    private final Integer visitDate;
+    private final HashMap<Menu, Integer> order;
 
     public Order(Integer visitDate, HashMap<Menu, Integer> order) {
         this.visitDate = visitDate;
