@@ -51,7 +51,7 @@ public class UserService {
     }
 
     private void validateOrderResult(HashMap<Menu, Integer> result) {
-        if (Menu.onlyDrink(List.copyOf(result.keySet()))) {
+        if (Menu.isOnlyDrink(List.copyOf(result.keySet()))) {
             throw new IllegalArgumentException(Constants.ORDER_ERROR);
         }
 

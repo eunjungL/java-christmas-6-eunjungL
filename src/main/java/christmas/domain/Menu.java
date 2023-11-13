@@ -38,7 +38,7 @@ public enum Menu {
                 .orElseThrow();
     }
 
-    public static Boolean onlyDrink(List<Menu> menus) {
+    public static Boolean isOnlyDrink(List<Menu> menus) {
         for (Menu menu : menus) {
             if (menu.menuType != MenuType.DRINK) {
                 return false;
@@ -48,12 +48,12 @@ public enum Menu {
         return true;
     }
 
-    public static Integer getMenuCountByMenuType(HashMap<Menu, Integer> menus, MenuType menuType) {
+    public static Integer getMenuCountByMenuType(HashMap<Menu, Integer> order, MenuType menuType) {
         int count = 0;
 
-        for (Menu menu : menus.keySet()) {
+        for (Menu menu : order.keySet()) {
             if (menu.menuType == menuType) {
-                count += menus.get(menu);
+                count += order.get(menu);
             }
         }
 
