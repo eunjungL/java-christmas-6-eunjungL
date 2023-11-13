@@ -19,6 +19,7 @@ public class ChristmasService {
 
         result.add(getDDayDiscount(order));
         result.add(getWeekDayDiscount(order));
+        result.add(getWeekEndDiscount(order));
 
         return String.join("\n", result);
     }
@@ -35,5 +36,12 @@ public class ChristmasService {
 
         if (discountPrice == 0) return "";
         return String.format("%s%s원", Event.WEEKDAY, DecimalUtil.convertToFormat(discountPrice));
+    }
+
+    private String getWeekEndDiscount(Order order) {
+        int discountPrice = order.getWeekEndDiscount();
+
+        if (discountPrice == 0) return "";
+        return String.format("%s%s원", Event.WEEKEND, DecimalUtil.convertToFormat(discountPrice));
     }
 }

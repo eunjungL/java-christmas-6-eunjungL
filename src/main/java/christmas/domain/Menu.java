@@ -48,11 +48,11 @@ public enum Menu {
         return true;
     }
 
-    public static Integer getDessertCount(HashMap<Menu, Integer> menus) {
+    public static Integer getMenuCountByMenuType(HashMap<Menu, Integer> menus, MenuType menuType) {
         int count = 0;
 
         for (Menu menu : menus.keySet()) {
-            if (menu.menuType == MenuType.DESSERT) {
+            if (menu.menuType == menuType) {
                 count += menus.get(menu);
             }
         }

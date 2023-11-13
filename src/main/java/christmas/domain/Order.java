@@ -39,7 +39,17 @@ public class Order {
         int discountPrice = 0;
 
         if (Event.checkWeekDay(visitDate)) {
-            discountPrice += Event.WEEKDAY.getDiscountPrice() * Menu.getDessertCount(order);
+            discountPrice += Event.WEEKDAY.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.DESSERT);
+        }
+
+        return discountPrice;
+    }
+
+    public Integer getWeekEndDiscount() {
+        int discountPrice = 0;
+
+        if (Event.checkWeekEnd(visitDate)) {
+            discountPrice += Event.WEEKEND.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.MAIN);
         }
 
         return discountPrice;
