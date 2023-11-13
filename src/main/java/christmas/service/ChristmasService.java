@@ -4,6 +4,9 @@ import christmas.DecimalUtil;
 import christmas.domain.Event;
 import christmas.domain.Order;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChristmasService {
     public String getPresentation(Order order) {
         if (order.checkPresentation()) return "샴페인 1개";
@@ -12,11 +15,12 @@ public class ChristmasService {
     }
 
     public String getAppliedEvents(Order order) {
-        StringBuilder result = new StringBuilder();
+        List<String> result = new ArrayList<>();
 
-        result.append(getDDayDiscount(order));
+        result.add(getDDayDiscount(order));
+        result.add(getWeekDayDiscount(order));
 
-        return result.toString();
+        return String.join("\n", result);
     }
 
     private String getDDayDiscount(Order order) {
@@ -24,5 +28,12 @@ public class ChristmasService {
 
         if (discountPrice == 0) return "";
         return String.format("%s%s원", Event.D_DAY, DecimalUtil.convertToFormat(discountPrice));
+    }
+
+    private String getWeekDayDiscount(Order order) {
+        int discountPrice = order.getWeekDayDiscount();
+
+        if (discountPrice == 0) return "";
+        return String.format("%s%s원", Event.WEEKDAY, DecimalUtil.convertToFormat(discountPrice));
     }
 }

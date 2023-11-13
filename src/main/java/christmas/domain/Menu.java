@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.Constants;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public enum Menu {
@@ -45,6 +46,18 @@ public enum Menu {
         }
 
         return true;
+    }
+
+    public static Integer getDessertCount(HashMap<Menu, Integer> menus) {
+        int count = 0;
+
+        for (Menu menu : menus.keySet()) {
+            if (menu.menuType == MenuType.DESSERT) {
+                count += menus.get(menu);
+            }
+        }
+
+        return count;
     }
 
     public String getName() {

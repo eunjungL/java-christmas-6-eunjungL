@@ -35,6 +35,16 @@ public class Order {
         return 1000 + (visitDate - 1) * Event.D_DAY.getDiscountPrice();
     }
 
+    public Integer getWeekDayDiscount() {
+        int discountPrice = 0;
+
+        if (Event.checkWeekDay(visitDate)) {
+            discountPrice += Event.WEEKDAY.getDiscountPrice() * Menu.getDessertCount(order);
+        }
+
+        return discountPrice;
+    }
+
     @Override
     public String toString() {
         List<String> result = new ArrayList<>();
