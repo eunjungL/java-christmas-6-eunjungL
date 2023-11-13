@@ -10,12 +10,13 @@ public class Order {
     private final Integer visitDate;
     private final HashMap<Menu, Integer> order;
     private final List<Event> appliedEvents;
+    private Integer totalDiscountPrice;
 
     public Order(Integer visitDate, HashMap<Menu, Integer> order) {
         this.visitDate = visitDate;
         this.order = order;
-
         this.appliedEvents = getAppliedEvents();
+        this.totalDiscountPrice = 0;
     }
 
     public Integer getTotalPriceBeforeDiscount() {
@@ -53,6 +54,14 @@ public class Order {
             return event.getDiscountPrice() * Menu.getMenuCountByMenuType(order, MenuType.MAIN);
 
         return event.getDiscountPrice();
+    }
+
+    public void updateTotalDiscountPrice(Integer discountPrice) {
+        totalDiscountPrice += discountPrice;
+    }
+
+    public Integer getTotalDiscountPrice() {
+        return totalDiscountPrice;
     }
 
     @Override

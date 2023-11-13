@@ -3,7 +3,6 @@ package christmas.service;
 import christmas.DecimalUtil;
 import christmas.domain.Event;
 import christmas.domain.Order;
-import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,16 @@ public class ChristmasService {
         List<String> result = new ArrayList<>();
 
         for (Event event : Event.values()) {
-            if (order.checkAppliedEvents(event) && order.getDiscountPrice(event) > 0) {
+            int discountPrice = order.getDiscountPrice(event);
+
+            if (order.checkAppliedEvents(event) && discountPrice > 0) {
                 String discountInfo = String.format("%s%s원",
                         event,
                         DecimalUtil.convertToFormat(order.getDiscountPrice(event))
                 );
 
                 result.add(discountInfo);
+                order.updateTotalDiscountPrice(discountPrice);
             }
         }
 
@@ -40,14 +42,6 @@ public class ChristmasService {
     }
 
     public Integer getTotalDiscountPrice(Order order) {
-        int totalDiscountPrice = 0;
-
-        for (Event event : Event.values()) {
-            if (order.checkAppliedEvents(event) && order.getDiscountPrice(event) > 0) {
-                totalDiscountPrice += order.getDiscountPrice(event);
-            }
-        }
-
-        return totalDiscountPrice;
+        return order.getTotalDiscountPrice();
     }
 }
