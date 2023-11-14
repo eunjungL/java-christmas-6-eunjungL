@@ -39,7 +39,7 @@ class UserServiceTest {
 
     @DisplayName("주문 입력 예외 처리 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"타파스-0", "타파스-19,레드와인-2", "파스타-2", "레드와인-1,제로콜라-1"})
+    @ValueSource(strings = {"타파스-0", "타파스-19,레드와인-2", "파스타-2", "레드와인-1,제로콜라-1", "티본스테이크-1,티본스테이크-2"})
     void validateGetMenusTest(String menus) {
         assertThatThrownBy(() -> {
             userService.getMenus(menus);
