@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -76,6 +77,13 @@ class OrderTest {
                 .isEqualTo(1000);
     }
 
+    private void updateDiscountPrice(Order order) {
+        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.PRESENTATION));
+        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.SPECIAL));
+        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.WEEKDAY));
+        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.D_DAY));
+    }
+
     @DisplayName("총 혜택 금액 테스트")
     @Test
     void getTotalDiscountPrice() {
@@ -83,10 +91,7 @@ class OrderTest {
         assertThat(order.getTotalDiscountPrice()).isEqualTo(0);
 
         order = new Order(5, eventMenus);
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.PRESENTATION));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.SPECIAL));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.WEEKDAY));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.D_DAY));
+        updateDiscountPrice(order);
         assertThat(order.getTotalDiscountPrice())
                 .isEqualTo(31446);
     }
@@ -95,10 +100,7 @@ class OrderTest {
     @Test
     void getTotalPriceAfterDiscount() {
         Order order = new Order(3, eventMenus);
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.PRESENTATION));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.SPECIAL));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.WEEKDAY));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.D_DAY));
+        updateDiscountPrice(order);
 
         assertThat(order.getTotalPriceAfterDiscount())
                 .isEqualTo(135754);
@@ -106,10 +108,7 @@ class OrderTest {
         // 샴페인 주문했을 시 결제 금액에서 이벤트 금액 차감
         eventMenus.put(Menu.CHAMPAGNE, 2);
         order = new Order(3, eventMenus);
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.PRESENTATION));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.SPECIAL));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.WEEKDAY));
-        order.updateTotalDiscountPrice(order.getDiscountPrice(Event.D_DAY));
+        updateDiscountPrice(order);
 
         assertThat(order.getTotalPriceAfterDiscount())
                 .isEqualTo(160754);
